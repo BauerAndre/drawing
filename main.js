@@ -11,13 +11,21 @@ ctx.lineWidth = 5;
 
 let draw = false;
 
-// Set draw to true when mouse is pressed
+// Selecting all the div that has a class of clr
+let clrs = document.querySelectorAll(".clr");
+// Converting NodeList to Array
+clrs = Array.from(clrs);
+
+clrs.forEach((clr) => {
+  clr.addEventListener("click", () => {
+    ctx.strokeStyle = clr.dataset.clr;
+  });
+});
+
 window.addEventListener("mousedown", (e) => (draw = true));
-// Set draw to false when mouse is released
 window.addEventListener("mouseup", (e) => (draw = false));
 
 window.addEventListener("mousemove", (e) => {
-  // if draw is false then we won't draw
   if (prevX == null || prevY == null || !draw) {
     prevX = e.clientX;
     prevY = e.clientY;
